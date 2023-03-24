@@ -1,10 +1,8 @@
 ﻿using FoodMenuTest.Data.Entities;
 using FoodMenuTest.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using FoodMenuTest.Model;
+using FoodMenuTest.Helper;
 
 namespace FoodMenuTest.Controllers
 {
@@ -34,13 +32,13 @@ namespace FoodMenuTest.Controllers
         }
 
         [HttpGet("{email}/{password}")]
-        public async Task<ActionResult<LoginResult>> LoginUserAsync(string email , string password)
+        public async Task<ActionResult<LoginResult>> LoginAsync(string email , string password)
         {
-            return await _userRepository.LoginUserAsync(email, password);  
+            return await _userRepository.LoginAsync(email, password);  
         }
 
-        [HttpPost]
-        public async Task<ActionResult<User>> saveUser (User user)
+        [HttpPost("Register")]
+        public async Task<ActionResult<User>> RegisterAsync([FromBody] User user)
         {
 
             var newUser = new User();
@@ -51,7 +49,9 @@ namespace FoodMenuTest.Controllers
             newUser.password = user.password;
             newUser.confirmPassword = user.confirmPassword;
 
-            return await _userRepository.SaveUserAsync(newUser);
+            return await _userRepository.RegisterAsync(newUser);
         }
+
+       
     }
 }

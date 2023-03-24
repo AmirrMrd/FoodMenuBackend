@@ -7,8 +7,8 @@ namespace FoodMenuTest.Repository
     {
         Task<IEnumerable<User>> GetAllUserAsync();
         Task <User?> GetUserByIdAsync(int Id);
-        Task<User> SaveUserAsync(User newUser);
+        Task<User> RegisterAsync(User newUser);
         
-        Task<LoginResult> LoginUserAsync (string email , string password);
+        Task<LoginResult> LoginAsync (string email , string password);
     }
 }
